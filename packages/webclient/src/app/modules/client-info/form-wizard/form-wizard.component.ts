@@ -1,15 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import Stepper from 'bs-stepper';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-form-wizard',
   templateUrl: './form-wizard.component.html',
-  styleUrls: ['./form-wizard.component.scss']
+  styleUrls: ['./form-wizard.component.scss'],
 })
-export class FormWizardComponent implements OnInit {
-
-  constructor() { }
+export class FormWizardComponent implements OnInit, OnDestroy {
+  private _stepper: Stepper;
+  private _onDestroy: Subject<void> = new Subject();
+  constructor() {}
 
   ngOnInit(): void {
+    this._stepper = new Stepper(document.querySelector('#stepper'), {
+      linear: false,
+      animation: true,
+    });
   }
 
+  ngOnDestroy(): void {
+    this._onDestroy.next();
+  }
+
+  next() {
+    this._stepper.next();
+  }
+
+  previous() {
+    this._stepper.previous();
+  }
 }
