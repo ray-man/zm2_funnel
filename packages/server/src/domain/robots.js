@@ -65,6 +65,14 @@ class RobotsService {
 
     return robot;
   }
+
+  async getTypes() {
+    const { Robot } = this.sequelize.models;
+
+    return Robot.aggregate("type", "DISTINCT", { plain: false }).then((types) =>
+      types.map((type) => type.DISTINCT)
+    );
+  }
 }
 
 module.exports = RobotsService;

@@ -7433,6 +7433,13 @@ next-tick@~1.0.0:
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
   integrity sha1-yobR/ogoFpsBICCOPchCS524NCw=
 
+ng-multiselect-dropdown@^0.2.10:
+  version "0.2.10"
+  resolved "https://registry.yarnpkg.com/ng-multiselect-dropdown/-/ng-multiselect-dropdown-0.2.10.tgz#464dfe34c09d23b1ba8eb851663d05f4614fd1aa"
+  integrity sha512-X7JlVgWMUmkabWxGNxlNmPmBi/dPAPTSc5lkBmeZbWBehL+yrfrHVAs2F27w5genI7u64CIR1AHMINy51/ueUg==
+  dependencies:
+    tslib "^1.9.0"
+
 ngx-bootstrap@^5.6.1:
   version "5.6.1"
   resolved "https://registry.yarnpkg.com/ngx-bootstrap/-/ngx-bootstrap-5.6.1.tgz#c37643247441f9d421bca2cd7d7de1d0445e903f"

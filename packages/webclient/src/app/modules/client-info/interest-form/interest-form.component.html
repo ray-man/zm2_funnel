@@ -1,1 +1,36 @@
-<p>interest-form works!</p>
+<form [formGroup]="interestForm">
+  <div class="form-group">
+    <label for="brand">Brand</label>
+    <ng-multiselect-dropdown
+      [data]="robotBrands"
+      [settings]="ddBrandSettings"
+      formControlName="brand"
+    >
+    </ng-multiselect-dropdown>
+  </div>
+  <div class="form-group">
+    <label for="robotType">Robot Type</label>
+    <ng-multiselect-dropdown
+      [data]="robotTypes"
+      [settings]="ddTypesSettings"
+      formControlName="robotType"
+    >
+    </ng-multiselect-dropdown>
+  </div>
+  <div class="form-group">
+    <label for="autonomy">Autonomy</label>
+    <input type="text" class="form-control" formControlName="autonomy" />
+  </div>
+  <div class="form-group">
+    <label for="weight">Weight</label>
+    <input type="text" class="form-control" formControlName="weight" />
+  </div>
+  <div class="form-group">
+    <label for="minRange">Cost Min.</label>
+    <input type="number" class="form-control" formControlName="minRange" />
+  </div>
+  <div class="form-group">
+    <label for="maxRange">Cost Max.</label>
+    <input type="number" class="form-control" formControlName="maxRange" />
+  </div>
+</form>

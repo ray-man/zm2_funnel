@@ -8,8 +8,13 @@ import { InterestFormComponent } from './interest-form/interest-form.component';
 import { FeatureFormComponent } from './feature-form/feature-form.component';
 import { ClientEngagementComponent } from './client-engagement/client-engagement.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
-const NG_MODULES = [FormsModule, ReactiveFormsModule];
+const NG_MODULES = [
+  FormsModule,
+  ReactiveFormsModule,
+  NgMultiSelectDropDownModule,
+];
 
 const FORM_COMPONENTS = [
   FormWizardComponent,
