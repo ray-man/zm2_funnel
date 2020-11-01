@@ -10,4 +10,8 @@ export class ClientService {
   public create(data: Client) {
     return this.http.post('/api/clients', data);
   }
+
+  public addLead(data: any) {
+    return this.http.post('/api/leads', data);
+  }
 }

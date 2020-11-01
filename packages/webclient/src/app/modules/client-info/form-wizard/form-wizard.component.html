@@ -9,14 +9,14 @@
       </div>
       <div class="line"></div>
       <div class="step" data-target="#interest-form">
-        <button class="step-trigger">
+        <button class="step-trigger" [disabled]="!clientId">
           <span class="bs-stepper-circle">2</span>
           <span class="bs-stepper-label">General Interest</span>
         </button>
       </div>
       <div class="line"></div>
       <div class="step" data-target="#feature-form">
-        <button class="step-trigger">
+        <button class="step-trigger" [disabled]="!interests">
           <span class="bs-stepper-circle">3</span>
           <span class="bs-stepper-label">Optional Features</span>
         </button>
@@ -24,14 +24,19 @@
     </div>
     <div class="bs-stepper-content">
       <div id="info-form" class="content">
-        <app-info-form (moveNext)="next()"></app-info-form>
+        <app-info-form (moveNext)="next(); clientId = $event"></app-info-form>
       </div>
       <div id="interest-form" class="content">
-        <app-interest-form></app-interest-form>
+        <app-interest-form
+          (moveNext)="next(); interests = $event"
+        ></app-interest-form>
         <button (click)="previous()" class="btn">Previous</button>
       </div>
       <div id="feature-form" class="content">
-        <app-feature-form></app-feature-form>
+        <app-feature-form
+          [interest]="interests"
+          [clientId]="clientId"
+        ></app-feature-form>
         <button (click)="previous()" class="btn">Previous</button>
       </div>
     </div>

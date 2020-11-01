@@ -10,6 +10,8 @@ import { Subject } from 'rxjs';
 export class FormWizardComponent implements OnInit, OnDestroy {
   private _stepper: Stepper;
   private _onDestroy: Subject<void> = new Subject();
+  public interests: any;
+  public clientId: any;
   constructor() {}
 
   ngOnInit(): void {

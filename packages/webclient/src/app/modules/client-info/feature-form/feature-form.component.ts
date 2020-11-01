@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { RobotService } from '../../robots/robot.service';
+import { ClientService } from './../client.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -12,9 +13,16 @@ export class FeatureFormComponent implements OnInit {
   public featureForm: FormGroup;
   public ddFeatureSettings: any;
 
+  @Input()
+  public interest: any;
+
+  @Input()
+  public clientId: string;
+
   constructor(
     private _robotService: RobotService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private _clientService: ClientService
   ) {}
 
   ngOnInit(): void {
@@ -39,7 +47,19 @@ export class FeatureFormComponent implements OnInit {
 
   submit() {
     if (this.featureForm.valid) {
-      console.log(this.featureForm.value);
+      const data = {
+        clinetId: this.clientId,
+        feature: this.featureForm.value,
+        meta: this.interest,
+      };
+      this._clientService.addLead(data).subscribe(
+        (response) => {
+          console.log(response);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
     } else {
       console.error(this.featureForm.errors);
     }

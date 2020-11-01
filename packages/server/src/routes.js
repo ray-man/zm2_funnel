@@ -2,6 +2,7 @@ const robotsController = require("./controllers/robots");
 const staffMembersController = require("./controllers/staffMembers");
 const clientsController = require("./controllers/clients");
 const infoController = require("./controllers/info");
+const leadController = require("./controllers/leads");
 
 const logger = require("./logger");
 
@@ -16,4 +17,5 @@ module.exports = (app) => {
   app.use("/api/staff-members", staffMembersController);
   app.use("/api/clients", clientsController);
   app.use("/api/info", infoController);
+  app.use("/api/leads", leadController);
 };
