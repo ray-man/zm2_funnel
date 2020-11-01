@@ -6,7 +6,7 @@ class ClientService {
 
   async create(data) {
     const { Client } = this.sequelize.models;
-    record = null;
+    let record = null;
     try {
       record = await Client.create(data);
     } catch (e) {
@@ -16,3 +16,5 @@ class ClientService {
     }
   }
 }
+
+module.exports = ClientService;

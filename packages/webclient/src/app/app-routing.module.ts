@@ -22,7 +22,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'client-info',
+    path: 'lead-genrator',
     loadChildren: () =>
       import('./modules/client-info/client-info.module').then(
         (m) => m.ClientInfoModule
