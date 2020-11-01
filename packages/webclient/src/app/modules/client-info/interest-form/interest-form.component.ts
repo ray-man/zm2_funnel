@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { RobotService } from '../../robots/robot.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -9,11 +9,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class InterestFormComponent implements OnInit {
   public robotTypes: any;
-  public robotFeatures: any;
   public interestForm: FormGroup;
   public ddTypesSettings: any;
   public ddBrandSettings: any;
   public robotBrands: any;
+
+  @Output()
+  moveNext: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private _robotService: RobotService,
@@ -23,7 +25,8 @@ export class InterestFormComponent implements OnInit {
   ngOnInit(): void {
     this._robotService.getTypes().subscribe(
       (response) => {
-        this.robotTypes = response.map((item) => item.toUpperCase());
+        this.robotTypes = response;
+        this.robotTypes = this.robotTypes.map((item) => item.toUpperCase());
       },
       (error) => {
         console.error(error);
@@ -63,5 +66,12 @@ export class InterestFormComponent implements OnInit {
       itemsShowLimit: 3,
       allowSearchFilter: true,
     };
+  }
+
+  submit() {
+    if (this.interestForm.valid) {
+      const data = this.interestForm.value;
+      this.moveNext.emit(data);
+    }
   }
 }

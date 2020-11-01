@@ -1,1 +1,19 @@
-<p>feature-form works!</p>
+<form [formGroup]="featureForm">
+  <div class="form-group">
+    <label for="feature">Features</label>
+    <ng-multiselect-dropdown
+      [data]="robotFeatures"
+      [settings]="ddFeatureSettings"
+      formControlName="feature"
+    >
+    </ng-multiselect-dropdown>
+  </div>
+  <button type="reset" class="btn btn-reset mb-2 float-right">Cancel</button>
+  <button
+    type="submit"
+    (click)="submit()"
+    class="btn btn-primary mb-2 float-right"
+  >
+    Save
+  </button>
+</form>
