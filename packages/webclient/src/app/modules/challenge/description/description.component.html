@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="card mt-3">
+    <div class="card-body">
+      <h5 class="card-title">Mission Recon</h5>
+      <p class="card-text">
+        Congrats! The web client is successfully running. Make sure the database and API work as
+        well before starting the challenge.
+      </p>
+
+      <p class="card-text">
+        Take a look through the codebase to find out how things currently work and let us know as
+        part of your solution submission if you find a few things that you would improve. Solve the
+        main challenge and all of the bonus round problems to get the best chances of receiving a
+        job offer.
+      </p>
+    </div>
+  </div>
+
+  <div class="card mt-3">
+    <div class="card-body">
+      <h5 class="card-title">Main Challenge</h5>
+      <p class="card-text">
+        You are working on an app used in an expensive robots shop. The existing functionality helps
+        us keep track of all the robots we are currently trying to sell, and the staff members who
+        are experts in each type of robot. You can only update the name and the price of a robot
+        from the UI, but with some skills, you can do a whole lot more.
+      </p>
+
+      <p class="card-text">
+        We are starting to get a lot of calls from clients interested in our robots, and it's hard
+        to keep track of things. We need a new module that allows us to gather information about the
+        client's interest, and allocate them to the staff members in a way that maximizes our
+        chances of selling all the robots.
+      </p>
+
+      <p class="card-text">
+        Some clients know exactly what they want, others are just testing the waters. Nevertheless,
+        we want our staff members to engage with all of them.
+      </p>
+
+      <p class="card-text">
+        You need to implement a new page where we can fill in the information gathered from the
+        client.
+      </p>
+
+      <ul>
+        <li><strong>Client information</strong>: name, email, phone number, address, notes</li>
+        <li>
+          <strong>General interest</strong>: hardware type, brand, autonomy, weight, price range
+          <small class="text-muted">
+            (e.g. Cleaning robot, RobotFactory, 48 hours, 2 kg, $500 - $1000)
+          </small>
+        </li>
+        <li>
+          <strong>Optional features</strong> that can sometimes make the difference
+          <small class="text-muted">(e.g. knows how to dance, makes good breakfast, etc.)</small>
+        </li>
+      </ul>
+
+      <p class="card-text">
+        Upon saving the form, you need to allocate the client to the staff member who has the
+        highest chance of finding a robot for them. Use the following rules to find this match. Keep
+        in mind that these rules might change quite often as we experiment with different
+        approaches.
+      </p>
+
+      <ul>
+        <li>
+          Pick the staff member who has knowledge in the biggest number of robots that strictly
+          match the general requirements of the client
+          <small class="text-muted"
+            >(e.g. if a robot is cheaper or more expensive than what the client requested, it should
+            not be considered as a match)</small
+          >
+        </li>
+        <li>
+          If there is a tie between two or more staff members, pick the one staff who has the
+          biggest average count of optional features for the matching robots
+        </li>
+        <li>
+          If there is still a tie, pick the one staff who has the biggest average price for the
+          matching robots
+        </li>
+        <li>If there is still a tie, pick at random one of these staff members</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card mt-3">
+    <div class="card-body">
+      <h5 class="card-title">Bonus Round</h5>
+
+      <ol>
+        <li>
+          Fix the performance issues on the existing pages.
+        </li>
+
+        <li>
+          Create migrations for the existing database schema.
+        </li>
+
+        <li>
+          Increase the test coverage as much as you can.
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>

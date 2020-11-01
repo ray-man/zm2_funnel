@@ -1,0 +1,49 @@
+<table *ngIf="robots.length !== 0" class="table">
+  <thead>
+    <tr>
+      <th scope="col" class="text-right">#</th>
+      <th scope="col" class="text-center">Type</th>
+      <th scope="col">Brand</th>
+      <th scope="col">Name</th>
+      <th scope="col" class="text-right">Price</th>
+      <th scope="col" class="text-right">Weight</th>
+      <th scope="col" class="text-right">Autonomy</th>
+      <th scope="col" class="text-right">Features</th>
+      <th scope="col" class="text-right">Experts</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let robot of robots">
+      <th scope="row" class="text-right">
+        <a [routerLink]="['/robots', robot.id]">{{ robot.id }}</a>
+      </th>
+      <td class="text-center">
+        <span class="badge badge-pill" [ngClass]="getBadgeClass(robot)">
+          {{ robot.type.slice(0, 1) | titlecase }}
+        </span>
+      </td>
+      <td>{{ robot.brand.name }}</td>
+      <td>{{ robot.name }}</td>
+      <td class="text-right">{{ robot.price | currency: undefined:"symbol":"1.0-0" }}</td>
+      <td class="text-right text-nowrap">{{ robot.weight }} kg</td>
+      <td class="text-right text-nowrap">{{ robot.autonomy }} hours</td>
+      <td class="text-right">{{ robot.features.length }}</td>
+      <td class="text-right">{{ robot.experts.length }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="container">
+  <p *ngIf="isLoading" class="text-center">
+    Loading table data. Please wait for a few seconds as this can be slow, depending on how big the
+    data seed is.
+  </p>
+
+  <p *ngIf="!isLoading && isError" class="text-center">
+    There was an error while loading the data. Try fixing it.
+  </p>
+
+  <p *ngIf="!isLoading && !isError && robots.length === 0" class="text-center">
+    No data available. Use the data seed to fill in the DB with dummy data.
+  </p>
+</div>
