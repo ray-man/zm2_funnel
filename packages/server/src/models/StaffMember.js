@@ -44,6 +44,12 @@ module.exports = (sequelize, DataTypes) => {
       through: "RobotExpert",
       foreignKey: "staffMemberId",
     });
+
+    StaffMember.belongsToMany(Robot, {
+      as: "leads",
+      through: "LeadExpert",
+      foreignKey: "expertId",
+    });
   };
 
   return StaffMember;

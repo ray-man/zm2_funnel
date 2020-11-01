@@ -51,5 +51,15 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
+  Client.associate = () => {
+    const { Lead } = sequelize.models;
+
+    Client.belongsToMany(Lead, {
+      as: "leads",
+      through: "ClientLead",
+      foreignKey: "clientId",
+    });
+  };
+
   return Client;
 };
