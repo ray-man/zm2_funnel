@@ -14,4 +14,8 @@ export class ClientService {
   public addLead(data: any) {
     return this.http.post('/api/leads', data);
   }
+
+  public getLead(id: any) {
+    return this.http.get(`/api/leads/${id}`);
+  }
 }

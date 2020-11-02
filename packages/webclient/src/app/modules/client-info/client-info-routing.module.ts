@@ -9,7 +9,6 @@ const routes: Routes = [
     path: '',
     component: FormWizardComponent,
   },
-  { path: 'client-engagement', component: ClientEngagementComponent },
   { path: 'lead/:id', component: LeadExpertComponent },
 ];
 

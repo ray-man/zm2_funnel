@@ -48,7 +48,6 @@ export class FeatureFormComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.interest);
     if (this.featureForm.valid) {
       const data = {
         clientId: this.clientId,
@@ -58,7 +57,7 @@ export class FeatureFormComponent implements OnInit {
       this._clientService.addLead(data).subscribe(
         (response) => {
           if (response.hasOwnProperty('id')) {
-            this._router.navigate(['lead', response.id]);
+            this._router.navigate(['lead-genrator/lead/', response['id']]);
           }
         },
         (error) => {

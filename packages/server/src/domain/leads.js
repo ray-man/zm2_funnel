@@ -4,11 +4,23 @@ class LeadService {
     this.sequelize = sequelize;
   }
 
+  async getExpertById(id) {
+    this.logger.info({ data: { id } }, "Retrieving a lead Expert by Lead id");
+    const { LeadExpert, StaffMember } = this.sequelize.models;
+    let staff = null;
+    await LeadExpert.findOne({ where: { id }, raw: true }).then((result) => {
+      staff = StaffMember.findOne({
+        where: { id: result.expertId },
+        raw: true,
+      });
+    });
+
+    return staff;
+  }
+
   async create(data) {
     const { Lead } = this.sequelize.models;
     let record = null;
-    let robots = null;
-    this.logger.info(data);
     try {
       record = await Lead.create(data);
     } catch (e) {
@@ -108,6 +120,8 @@ class LeadService {
         switch (true) {
           case expertCompetition.length == 0:
             this.logger.info("############# No Result");
+            let expert = await this.randomExpert();
+            assignedExpert = await this.saveLeadExpert(leadId, expert.id);
             break;
           case expertCompetition.length == 1:
             this.logger.info("############# One result");
@@ -129,7 +143,15 @@ class LeadService {
               `############# More than one result. ${expertCompetition.length} ${expertCompetition[0]}`
             );
         }
+      } else {
+        this.logger.info("############# No Staff Result");
+        let expert = await this.randomExpert();
+        assignedExpert = await this.saveLeadExpert(leadId, expert.id);
       }
+    } else {
+      this.logger.info("############# No Robot Result");
+      let expert = await this.randomExpert();
+      assignedExpert = await this.saveLeadExpert(leadId, expert.id);
     }
     return assignedExpert;
   }
@@ -187,7 +209,24 @@ class LeadService {
       max.features > item.features ? max : item
     );
 
+    let expertCompetition = expertFeatureList.filter(
+      (item) => item.feature == expert.feature
+    );
+
+    if (expertCompetition.length > 1) {
+      this.logger.info("More then One exper is there");
+    }
+
     return expert;
+  }
+
+  async randomExpert() {
+    const { StaffMember } = this.sequelize.models;
+
+    return await StaffMember.findAll({
+      order: this.sequelize.literal("rand()"),
+      limit: 1,
+    });
   }
 }
 
