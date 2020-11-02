@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { RobotService } from '../../robots/robot.service';
 import { ClientService } from './../client.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-feature-form',
@@ -22,7 +23,8 @@ export class FeatureFormComponent implements OnInit {
   constructor(
     private _robotService: RobotService,
     private _formBuilder: FormBuilder,
-    private _clientService: ClientService
+    private _clientService: ClientService,
+    private _router: Router
   ) {}
 
   ngOnInit(): void {
@@ -55,7 +57,9 @@ export class FeatureFormComponent implements OnInit {
       };
       this._clientService.addLead(data).subscribe(
         (response) => {
-          console.log(response);
+          if (response.hasOwnProperty('id')) {
+            this._router.navigate(['lead', response.id]);
+          }
         },
         (error) => {
           console.error(error);

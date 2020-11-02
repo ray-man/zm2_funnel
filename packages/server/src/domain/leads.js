@@ -117,7 +117,17 @@ class LeadService {
             );
             break;
           case expertCompetition.length > 1:
-            this.logger.info("############# More than one result");
+            let exper = await this.featureFecth(
+              expertCompetition.map((exp) => exp.staffMemberId),
+              data.feature.feature.map((feat) => feat.id)
+            );
+            assignedExpert = await this.saveLeadExpert(
+              leadId,
+              exper.staffMemberId
+            );
+            this.logger.info(
+              `############# More than one result. ${expertCompetition.length} ${expertCompetition[0]}`
+            );
         }
       }
     }
@@ -137,6 +147,47 @@ class LeadService {
     } finally {
       return assignedExpert;
     }
+  }
+
+  async featureFecth(expertList, featureList) {
+    const { RobotExpert, Robot, RobotFeature } = this.sequelize.models;
+
+    let expertFeatureList = [];
+
+    expertList.forEach((expert) => {
+      let dic = { staffMemberId: expert };
+      RobotExpert.findAll({
+        where: { staffMemberId: expert },
+        attributes: ["robotId"],
+        raw: true,
+      }).then((result) => {
+        dic["robots"] = result.map((item) => item.robotId);
+
+        RobotFeature.findAll({
+          where: {
+            robotId: { $in: dic.robots },
+            featureId: { $in: featureList },
+          },
+          attributes: [
+            [
+              this.sequelize.fn("count", this.sequelize.col("robotId")),
+              "feature_count",
+            ],
+          ],
+          raw: true,
+        }).then((result) => {
+          dic["features"] = result.map((re) => re.feature_count);
+        });
+      });
+
+      expertFeatureList.push(dic);
+    });
+
+    let expert = expertFeatureList.reduce((max, item) =>
+      max.features > item.features ? max : item
+    );
+
+    return expert;
   }
 }
 
