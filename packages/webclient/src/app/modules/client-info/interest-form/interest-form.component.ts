@@ -1,4 +1,12 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  Input,
+  SimpleChanges,
+  OnChanges,
+} from '@angular/core';
 import { RobotService } from '../../robots/robot.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -7,7 +15,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './interest-form.component.html',
   styleUrls: ['./interest-form.component.scss'],
 })
-export class InterestFormComponent implements OnInit {
+export class InterestFormComponent implements OnInit, OnChanges {
   public robotTypes: any;
   public interestForm: FormGroup;
   public ddTypesSettings: any;
@@ -16,6 +24,9 @@ export class InterestFormComponent implements OnInit {
 
   @Output()
   moveNext: EventEmitter<any> = new EventEmitter<any>();
+
+  @Input()
+  public clientId: string;
 
   constructor(
     private _robotService: RobotService,
@@ -44,7 +55,7 @@ export class InterestFormComponent implements OnInit {
       weight: [''],
       minRange: [''],
       maxRange: [''],
-      client: [''],
+      leadClient: [''],
     });
 
     this.ddTypesSettings = {
@@ -66,6 +77,16 @@ export class InterestFormComponent implements OnInit {
       itemsShowLimit: 3,
       allowSearchFilter: true,
     };
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.updateClient(changes.clientId.currentValue);
+  }
+
+  updateClient(value: any) {
+    this.interestForm
+      ? this.interestForm.patchValue({ leadClient: value })
+      : false;
   }
 
   submit() {

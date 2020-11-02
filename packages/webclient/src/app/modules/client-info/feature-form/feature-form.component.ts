@@ -46,9 +46,10 @@ export class FeatureFormComponent implements OnInit {
   }
 
   submit() {
+    console.log(this.interest);
     if (this.featureForm.valid) {
       const data = {
-        clinetId: this.clientId,
+        clientId: this.clientId,
         feature: this.featureForm.value,
         meta: this.interest,
       };

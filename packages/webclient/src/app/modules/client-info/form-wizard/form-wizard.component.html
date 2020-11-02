@@ -29,13 +29,14 @@
       <div id="interest-form" class="content">
         <app-interest-form
           (moveNext)="next(); interests = $event"
+          [(clientId)]="clientId"
         ></app-interest-form>
         <button (click)="previous()" class="btn">Previous</button>
       </div>
       <div id="feature-form" class="content">
         <app-feature-form
           [interest]="interests"
-          [clientId]="clientId"
+          [(clientId)]="clientId"
         ></app-feature-form>
         <button (click)="previous()" class="btn">Previous</button>
       </div>
